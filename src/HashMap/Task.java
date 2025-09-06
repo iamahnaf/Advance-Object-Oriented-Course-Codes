@@ -21,8 +21,6 @@ public class Task {
         studentCourses.put(3,new ArrayList<>(Arrays.asList("BIO","ECO")));
 
         System.out.println(studentCourses);
-
-        //enrolled in bio
         List<Integer> enrolledinBio=findStudentsByCourse(studentCourses,"BIO");
         System.out.println(enrolledinBio);
 
