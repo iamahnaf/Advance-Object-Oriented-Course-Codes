@@ -41,6 +41,7 @@ public class Main {
         products.add(new Product("Samsung","phone",5000));
         products.add(new Product("Iphone","Phone",2000));
         products.add(new Product("Oneplus","Phone",1500));
+        products.add(new Product("Sony","Phone",12033));
 
 
         Product maxi=mostExpensive(products);
