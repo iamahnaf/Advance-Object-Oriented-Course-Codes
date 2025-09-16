@@ -1,6 +1,5 @@
-package FILEIO;
+package FileReader;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class FileReaderLearn {
@@ -12,5 +11,6 @@ public class FileReaderLearn {
             System.out.print((char) first);
             first = fr.read();
         }
+        fr.close();
     }
 }
