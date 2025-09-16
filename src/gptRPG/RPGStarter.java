@@ -1,4 +1,4 @@
-package chatgptRPG;
+package gptRPG;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
