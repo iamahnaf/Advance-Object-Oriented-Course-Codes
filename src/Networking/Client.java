@@ -10,7 +10,7 @@ public class Client {
     public static void main(String[] args) throws IOException {
         System.out.println("Client Started");
         //for connecting to server using ip and port
-        Socket socket = new Socket("127.0.0.1",5001);
+        Socket socket = new Socket("localhost",5002);
         System.out.println("Client connected");
         //now for comms object input and output stream
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

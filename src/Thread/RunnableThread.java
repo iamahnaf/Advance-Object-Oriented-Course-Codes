@@ -19,7 +19,17 @@ class newThread implements Runnable {
 }
 public class RunnableThread  {
     public static void main(String[] args) {
-        new newThread(1);
-        new newThread(2);
+        System.out.println("main thread started....");
+       newThread obj1= new newThread(1);
+       newThread obj2= new newThread(2);
+        System.out.println("Thread 1 is alive: "+obj1.t.isAlive());
+        System.out.println("Thread 2 is alive: "+obj2.t.isAlive());
+
+        try {
+            obj1.t.join(); // wait for obj1 thread untill it finish
+            obj2.t.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
