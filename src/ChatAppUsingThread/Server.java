@@ -46,8 +46,10 @@ class ServerThread implements Runnable {
                }
                System.out.println("For client: "+cmsg);
                String serverMsg = (String) cmsg;
+
                //making it uppcase
                serverMsg=serverMsg.toUpperCase();
+
                //sending it to client
                objectOutputStream.writeObject(serverMsg);
            }

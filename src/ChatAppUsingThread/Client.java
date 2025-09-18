@@ -16,27 +16,61 @@ public class Client {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
+        new ReaderThread(objectInputStream,"Client 1");
+        new WriterThread(objectOutputStream,"Client 1");
 
-        while (true) {
-            //for taking input from user for clinet msg
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            if(input.equals("exit")){
-                break;
-            }
 
-            //sending msg to server
-            objectOutputStream.writeObject(input);
+        //socket.close();
+    }
+}
+class ReaderThread implements Runnable{
+     ObjectInputStream objectInputStream;
+     String name;
+     Thread t;
+    ReaderThread(ObjectInputStream objectInputStream,String name){
+        this.objectInputStream = objectInputStream;
+        this.name = name;
+        t = new Thread(this);
+        t.start();
+    }
+    @Override
+    public void run() {
+        while(true){
 
             //receiving msg from server
             try {
-                Object object=objectInputStream.readObject();
-                System.out.println("From server: "+(String) object);
-            } catch (ClassNotFoundException e) {
+                Object received=objectInputStream.readObject();
+                System.out.println(name+" got:  "+(String) received);
+            } catch (ClassNotFoundException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
-        socket.close();
+
     }
 }
+class WriterThread implements Runnable{
+     ObjectOutputStream objectOutputStream;
+     String name;
+     Thread t;
+     WriterThread(ObjectOutputStream objectOutputStream,String name){
+         this.objectOutputStream = objectOutputStream;
+         this.name = name;
+         t = new Thread(this);
+         t.start();
+     }
+    @Override
+    public void run() {
+         Scanner scanner = new Scanner(System.in);
 
+        while(true){
+            String message = scanner.nextLine();
+            try {
+                objectOutputStream.writeObject(message);
+                System.out.println("Message sent...");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+
+            }
+        }
+    }
+}
