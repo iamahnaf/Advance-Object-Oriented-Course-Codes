@@ -16,8 +16,9 @@ public class Client {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-        new ReaderThread(objectInputStream,"Client 1");
+
         new WriterThread(objectOutputStream,"Client 1");
+        new ReaderThread(objectInputStream,"Client 1");
 
 
         //socket.close();
