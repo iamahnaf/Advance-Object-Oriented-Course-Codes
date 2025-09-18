@@ -15,7 +15,7 @@ public class Server {
     public static void main(String[] args) throws IOException {
         System.out.println("Server started...");
         ServerSocket serverSocket = new ServerSocket(5001);
-        //loop
+        //loop for getting multiple clients accept
         while (true) {
             Socket socket = serverSocket.accept();
             System.out.println("New connection from " + socket.getRemoteSocketAddress());
@@ -33,7 +33,11 @@ class ClientHandler implements Runnable {
         this.socket = socket;
         clientOutputStreams = list;
         try{
+            //socket tar output ready korlam
             out = new ObjectOutputStream(socket.getOutputStream());
+            //socket ta ke list e raklam
+            //socket er output ke list e raklam , output gular list e
+
             clientOutputStreams.add(out);
             in = new ObjectInputStream(socket.getInputStream());
         }catch (Exception e){
@@ -48,9 +52,10 @@ class ClientHandler implements Runnable {
         try{
 
             while(true){
+                //single socket ta msg dilo ata receive korlam
                 String message = (String) in.readObject();
                 System.out.println("Message received: " + message);
-               //broadcasting to all clinets
+               //broadcasting to all clinets, sobaike pathailm except nijeke
                for (ObjectOutputStream o : clientOutputStreams){
                    if(o != this.out){
                        try{
