@@ -12,7 +12,6 @@ class newThread implements Runnable {
         //printing
         for(int i=1;i<=5;i++){
             System.out.println(name+"child thread"+i);
-
         }
 
     }
